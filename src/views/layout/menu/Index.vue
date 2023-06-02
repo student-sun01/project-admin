@@ -49,6 +49,25 @@
           >
         </el-menu-item-group>
       </el-submenu>
+      <!-- 消息管理 -->
+      <el-submenu index="/news">
+        <template slot="title">
+          <i class="el-icon-chat-line-round"></i>
+          <span>消息管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/news/news-list">
+            <i class="el-icon-setting"></i>
+            消息列表</el-menu-item
+          >
+        </el-menu-item-group>
+        <el-menu-item-group>
+          <el-menu-item index="/news/news-collect">
+            <i class="el-icon-setting"></i>
+            消息收藏</el-menu-item
+          >
+        </el-menu-item-group>
+      </el-submenu>
       <!-- 广告 -->
       <el-submenu index="/advert">
         <template slot="title">
@@ -59,6 +78,25 @@
           <el-menu-item index="/advert/advert-list">
             <i class="el-icon-setting"></i>
             广告分类</el-menu-item
+          >
+        </el-menu-item-group>
+      </el-submenu>
+      <!-- 系统管理 -->
+       <el-submenu index="/systemanage">
+        <template slot="title">
+          <i class="el-icon-setting"></i>
+          <span>系统管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/systemanage/department">
+            <i class="el-icon-setting"></i>
+            部门管理</el-menu-item
+          >
+        </el-menu-item-group>
+        <el-menu-item-group>
+          <el-menu-item index="/systemanage/role">
+            <i class="el-icon-setting"></i>
+            角色管理</el-menu-item
           >
         </el-menu-item-group>
       </el-submenu>

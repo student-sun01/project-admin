@@ -11,6 +11,14 @@ const OrderList = ()=>import('@/views/order/order-list/Index.vue')
 const Collect = () => import("@/views/order/order-collect/Index.vue");
 const Advert  = ()=>import('@/views/advert/Index.vue')
 const AdvertList = ()=>import('@/views/advert/advert-list/Index.vue')
+const News = () => import("@/views/news/Index.vue");
+const NewsList = () => import("@/views/news/news-list/Index.vue");
+const NewsCollect = () => import("@/views/news/news-collect/Index.vue");
+//系统管理
+import SystemManage from '@/views/SystemManage'
+import Department from '@/views/SystemManage/department'
+import Role from '@/views/SystemManage/role'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -59,6 +67,24 @@ const routes = [
           },
         ],
       },
+      // 消息管理
+      {
+        path: "/news",
+        name: "news",
+        component: News,
+        children: [
+          {
+            path: "news-list",
+            name: "news-list",
+            component: NewsList,
+          },
+          {
+            path: "news-collect",
+            name: "news-collect",
+            component: NewsCollect,
+          },
+        ],
+      },
       // 广告
       {
         path: "/advert",
@@ -69,6 +95,24 @@ const routes = [
             path: "advert-list",
             name: "advert-list",
             component: AdvertList,
+          },
+        ],
+      },
+      // 系统管理
+      {
+        path: "/systemanage",
+        name: "systemanage",
+        component: SystemManage,
+        children: [
+          {
+            path: "department",
+            name: "department",
+            component: Department,
+          },
+          {
+            path: "role",
+            name: "role",
+            component: Role,
           },
         ],
       },
