@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Layout from "@/views/layout/Index.vue";
 import Login from "@/views/login/Index.vue";
 import Home from "@/views/home/Home.vue";
+/* 产品管理 */
+const ProductPage = () => import("@/views/product/list/ProductPage.vue");
 const Product = () => import("@/views/product/Index.vue");
 const List = () => import("@/views/product/list/Index.vue");
 const Category = () => import("@/views/product/category/Index.vue");
@@ -46,6 +48,11 @@ const routes = [
             path: "category",
             name: "category",
             component: Category,
+          },
+          {
+            path: "product-page",
+            name: "product-page",
+            component: ProductPage,
           },
         ],
       },

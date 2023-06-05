@@ -24,12 +24,12 @@
           <span>产品管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/product/category">
-            <i class="el-icon-setting"></i>
-            产品分类</el-menu-item
-          >
           <el-menu-item index="/product/list">
-            <i class="el-icon-setting"></i>产品列表</el-menu-item
+            <i class="el-icon-setting"></i>
+            产品列表</el-menu-item
+          >
+          <el-menu-item index="/product/category">
+            <i class="el-icon-setting"></i>产品分类</el-menu-item
           >
         </el-menu-item-group>
       </el-submenu>

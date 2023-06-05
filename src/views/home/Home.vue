@@ -254,9 +254,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.home {
-  margin: 10px;
-}
 .header {
   display: flex;
   padding-right: 30px;

@@ -16,7 +16,9 @@
       </div>
     </div>
     <!-- 内容区 -->
-    <router-view></router-view>
+    <div class="wrapper">
+      <router-view></router-view>
+    </div>  
   </div>
 </template>
 
@@ -32,6 +34,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.wrapper{
+  padding: 10px;
+}
 .header {
   height: 50px;
   background-color: #1e78bf;
