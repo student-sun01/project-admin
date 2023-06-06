@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-      :default-active="$route.path"
+      :default-active="active"
       class="el-menu-vertical-demo"
       background-color="#112f50"
       text-color="#fff"
@@ -107,6 +107,33 @@
 <script>
 export default {
   props: ["isCollapse"],
+  data() {
+    return {
+      active:''
+    }
+  },
+  created(){
+    /* 刷新后产品libiao列表不会高亮 是因为watch不会立即执行 */
+    if(this.$route.meta.activeMenu){
+        this.active = this.$route.meta.activeMenu
+      }else{
+        this.active = this.$route.path
+      }
+  },
+   watch: {
+    // 监听路由的变化--切换页面组件
+    $route(to, from) {
+      // 对路由变化作出响应...
+      console.log('watch---to',to);
+      /* 判断当前的路由里面 meta:{activeMenu:'/product/list'} */
+      let {meta,path} = to
+      if(meta.activeMenu){
+        this.active = meta.activeMenu
+      }else{
+        this.active = path
+      }
+    }
+  }
 };
 </script>
 

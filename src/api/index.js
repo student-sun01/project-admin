@@ -30,5 +30,9 @@ const api = {
   deleteItemById(params) {
     return axios.get(base.deleteItemById, { params });
   },
+  /* 类目选择接口 */
+  selectItemCategoryByParentId(params) {
+    return axios.get(base.selectItemCategoryByParentId, { params });
+  },
 };
 export default api;

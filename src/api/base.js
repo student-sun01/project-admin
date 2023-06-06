@@ -8,7 +8,11 @@ const base = {
   projectList: "/api/goods/projectList", //商品列表
   search: "/api/goods/search", //搜索接口
   deleteItemById: "/api/goods/deleteItemById", //删除接口
+  selectItemCategoryByParentId:
+    "/api/goods/itemCategory/selectItemCategoryByParentId", //商品添加 类目选择
+  uploadUrl: "/api/upload", //图片上传接口
 };
 // 单一导出
-export const host = "xxxx";
+export const host = "http://localhost:7788";
+export const uploadUrl = "/api/upload"; ;
 export default base;

@@ -4,22 +4,22 @@ import Layout from "@/views/layout/Index.vue";
 import Login from "@/views/login/Index.vue";
 import Home from "@/views/home/Home.vue";
 /* 产品管理 */
-const ProductPage = () => import("@/views/product/list/ProductPage.vue");
+const AddProduct = () => import("@/views/product/list/AddProduct.vue");
 const Product = () => import("@/views/product/Index.vue");
 const List = () => import("@/views/product/list/Index.vue");
 const Category = () => import("@/views/product/category/Index.vue");
-const Order = ()=>import('@/views/order/Index.vue')
-const OrderList = ()=>import('@/views/order/order-list/Index.vue')
+const Order = () => import("@/views/order/Index.vue");
+const OrderList = () => import("@/views/order/order-list/Index.vue");
 const Collect = () => import("@/views/order/order-collect/Index.vue");
-const Advert  = ()=>import('@/views/advert/Index.vue')
-const AdvertList = ()=>import('@/views/advert/advert-list/Index.vue')
+const Advert = () => import("@/views/advert/Index.vue");
+const AdvertList = () => import("@/views/advert/advert-list/Index.vue");
 const News = () => import("@/views/news/Index.vue");
 const NewsList = () => import("@/views/news/news-list/Index.vue");
 const NewsCollect = () => import("@/views/news/news-collect/Index.vue");
 //系统管理
-import SystemManage from '@/views/SystemManage'
-import Department from '@/views/SystemManage/department'
-import Role from '@/views/SystemManage/role'
+import SystemManage from "@/views/SystemManage";
+import Department from "@/views/SystemManage/department";
+import Role from "@/views/SystemManage/role";
 
 Vue.use(VueRouter);
 
@@ -50,9 +50,13 @@ const routes = [
             component: Category,
           },
           {
-            path: "product-page",
-            name: "product-page",
-            component: ProductPage,
+            path: "add-product",
+            name: "add-product",
+            component: AddProduct,
+            meta: {
+              //配置高亮标识
+              activeMenu: "/product/list",
+            },
           },
         ],
       },

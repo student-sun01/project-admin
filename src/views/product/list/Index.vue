@@ -128,7 +128,7 @@ export default {
     /* 点击添加商品跳转 */
     toProductPage(){
       console.log('添加商品哈哈哈哈哈');
-      this.$router.push("/product/product-page")
+      this.$router.push("/product/add-product")
     },
     /* 删除 */
     handleDelete(index, row) {
