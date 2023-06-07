@@ -34,5 +34,13 @@ const api = {
   selectItemCategoryByParentId(params) {
     return axios.get(base.selectItemCategoryByParentId, { params });
   },
+  /**
+   * 商品添加
+   * 参数： title cid  category sellPoint price num descs paramsInfo image
+   * title, image, sellPoint, price, cid, category, num, descs, paramsInfo
+   */
+  insertTbItem(params) {
+    return axios.get(base.insertTbItem, { params });
+  },
 };
 export default api;

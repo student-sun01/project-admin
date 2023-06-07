@@ -1,4 +1,6 @@
 <template>
+<!-- file-list	上传的文件列表, 例如: 
+[{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]	array	—	[] -->
   <div>
     <el-upload
       :on-success="handleSuccess"
@@ -6,6 +8,8 @@
       list-type="picture-card"
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove"
+      :file-list="fileList"
+      ref="upload"
       multiple
     >
       <i class="el-icon-plus"></i>
@@ -19,8 +23,7 @@ export default {
   data() {
     return {
       uploadUrl,
-      dialogImageUrl: "",
-      dialogVisible: false,
+      fileList:[]     
     };
   },
   methods: {
@@ -41,6 +44,10 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
+    /* 清空图片 */
+    clear(){
+      this.$refs.upload.clearFiles()
+    }
   },
 };
 </script>

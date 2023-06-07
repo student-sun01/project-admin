@@ -21,22 +21,26 @@
             <span>{{ ruleForm.category }}</span>
           </el-form-item>
           <el-form-item label="商品名称" prop="title">
-            <el-input v-model="ruleForm.title"></el-input>
+            <el-input v-model="ruleForm.title" size="small"></el-input>
           </el-form-item>
           <el-form-item label="商品价格" prop="price">
-            <el-input v-model="ruleForm.price"></el-input>
+            <el-input v-model="ruleForm.price" size="small"></el-input>
           </el-form-item>
           <el-form-item label="商品数量" prop="num">
-            <el-input v-model="ruleForm.num"></el-input>
+            <el-input v-model="ruleForm.num" size="small"></el-input>
           </el-form-item>
           <el-form-item label="商品卖点" prop="sellPoint">
-            <el-input v-model="ruleForm.sellPoint"></el-input>
+            <el-input v-model="ruleForm.sellPoint" size="small"></el-input>
           </el-form-item>
           <el-form-item label="上传图片" prop="image">
-            <UpLoading @sendUrl="sendUrl"></UpLoading>
+            <UpLoading @sendUrl="sendUrl" ref="uploadImg"></UpLoading>
           </el-form-item>
-          <el-form-item label="商品描述" prop="descs"> </el-form-item>
-
+          <el-form-item label="商品描述" prop="descs">
+            <WangEditor
+              @sendWangEditer="sendWangEditer"
+              ref="wangEditor"
+            ></WangEditor>
+          </el-form-item>
           <el-form-item label="首页轮播推进" prop="isShow">
             <el-switch
               v-model="ruleForm.isShow"
@@ -74,10 +78,12 @@
 <script>
 import TreeProduct from "./TreeProduct.vue";
 import UpLoading from "./UpLoading.vue";
+import WangEditor from "./WangEditor.vue";
 export default {
   components: {
     TreeProduct,
     UpLoading,
+    WangEditor,
   },
   data() {
     return {
@@ -115,18 +121,64 @@ export default {
       console.log("val----", val);
       this.ruleForm.image.push(val);
     },
+    /* 获取商品描述数据 */
+    sendWangEditer(val) {
+      console.log("富文本", val);
+      this.ruleForm.descs = val;
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          // alert("submit!");
+          // console.log("添加商品", this.ruleForm);
+          let {
+            id,
+            title,
+            image,
+            sellPoint,
+            price,
+            cid,
+            category,
+            num,
+            descs,
+          } = this.ruleForm;
+          this.insertTbItem({
+            title,
+            image: JSON.stringify(image),
+            sellPoint,
+            price,
+            cid,
+            category,
+            num,
+            descs,
+          });
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
+    /* 添加商品 */
+    async insertTbItem(params) {
+      let res = await this.$api.insertTbItem(params);
+      console.log("添加商品", res.data);
+      if (res.data.status === 200) {
+        this.$message({
+          message: "恭喜你，添加商品成功",
+          type: "success",
+        });
+        //跳转路由
+        this.$router.push("/product/list");
+      }
+    },
+    /* 重置 */
     resetForm(formName) {
       this.$refs[formName].resetFields();
+      /* 清除图片 */
+      this.$refs.uploadImg.clear();
+      /* 富文本清除 */
+      this.$refs.wangEditor.editor.clear()
+      // 第二种方法  this.$refs.wangEditor.html = "";
     },
   },
 };
@@ -146,7 +198,7 @@ export default {
   }
 }
 .wrapper {
-  height: 900px;
+  // height: 900px;
   background-color: #fff;
   .mytitle {
     background-color: #eee;

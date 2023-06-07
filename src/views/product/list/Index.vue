@@ -56,7 +56,7 @@
         <el-table-column label="添加时间">
           <template slot-scope="scope">
             <span>{{
-              moment(scope.row.create_time).format("YYYY-MM-DD")
+              moment(scope.row.create_time).format("YYYY-MM-DD HH:mm:ss")
             }}</span>
           </template>
         </el-table-column>

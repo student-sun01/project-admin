@@ -11,6 +11,7 @@ const base = {
   selectItemCategoryByParentId:
     "/api/goods/itemCategory/selectItemCategoryByParentId", //商品添加 类目选择
   uploadUrl: "/api/upload", //图片上传接口
+  insertTbItem: "/api/goods/item/insertTbItem", //添加商品
 };
 // 单一导出
 export const host = "http://localhost:7788";
