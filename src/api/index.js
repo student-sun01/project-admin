@@ -42,5 +42,85 @@ const api = {
   insertTbItem(params) {
     return axios.get(base.insertTbItem, { params });
   },
+  /**
+   * 批量删除 batchDelete  idArr Array  id标识
+   * sql = "delete from A where id in (1,2,3)"
+   * 接受 参数 字符串  （数组转字符串）  ids
+   */
+  batchDelete(params) {
+    return axios.get(base.batchDelete, { params });
+  },
+  /* 修改商品 */
+  updateTbItem(params) {
+    return axios.get(base.updateTbItem, { params });
+  },
+  /* 
+     产品列表分类
+    */
+  itemCategory() {
+    return axios.get(base.itemCategory);
+  },
+  /* 
+    新增子级类目
+    params={cid name}
+  */
+  insertItemCategory(params) {
+    return axios.get(base.insertItemCategory, { params });
+  },
+  /* 
+      修改类目
+      {id,name}
+    */
+  updateCategory(params) {
+    return axios.get(base.updateCategory, { params });
+  },
+
+  /* 
+      删除类目
+      {id}
+      */
+  deleteContentCategoryById(params) {
+    return axios.get(base.deleteContentCategoryById, { params });
+  },
+  /* 
+      一级类目新增
+      {name}
+       */
+  insertCategory(params) {
+    return axios.get(base.insertCategory, { params });
+  },
+  /* 
+    订单列表
+  */
+  orderList(params) {
+    return axios.get(base.orderList, { params });
+  },
+  /* 
+    订单汇总---ids=''
+    */
+  changeStatus(params) {
+    return axios.get(base.changeStatus, { params });
+  },
+  /* 
+    汇总清单
+    {page}
+     */
+  collect(params) {
+    return axios.get(base.collect, { params });
+  },
+  /* 
+      撤销汇总
+      {id}
+    */
+  cancel(params) {
+    return axios.get(base.cancel, { params });
+  },
+  /* 
+      订单详情
+      {id}
+    */
+  getDetail(params) {
+    return axios.get(base.detail, { params });
+  },
 };
 export default api;

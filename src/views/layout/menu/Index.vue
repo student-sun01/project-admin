@@ -25,11 +25,11 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/product/list">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-menu"></i>
             产品列表</el-menu-item
           >
           <el-menu-item index="/product/category">
-            <i class="el-icon-setting"></i>产品分类</el-menu-item
+            <i class="el-icon-menu"></i>产品分类</el-menu-item
           >
         </el-menu-item-group>
       </el-submenu>
@@ -41,11 +41,14 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/order/order-list">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-menu"></i>
             订单列表</el-menu-item
           >
           <el-menu-item index="/order/collect">
-            <i class="el-icon-setting"></i>订单汇总</el-menu-item
+            <i class="el-icon-menu"></i>订单汇总</el-menu-item
+          >
+          <el-menu-item index="/order/contract">
+            <i class="el-icon-menu"></i>订单审核</el-menu-item
           >
         </el-menu-item-group>
       </el-submenu>

@@ -23,6 +23,7 @@ export default {
   methods: {
     changeShow() {
       this.isCollapse = !this.isCollapse;
+      this.$store.commit("changeIsCollapse", this.isCollapse);
     },
   },
   components: {

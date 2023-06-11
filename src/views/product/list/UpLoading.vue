@@ -1,5 +1,5 @@
 <template>
-<!-- file-list	上传的文件列表, 例如: 
+  <!-- file-list	上传的文件列表, 例如: 
 [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]	array	—	[] -->
   <div>
     <el-upload
@@ -20,10 +20,18 @@
 <script>
 import { uploadUrl, host } from "@/api/base";
 export default {
+  props: {
+    fileList: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
+  },
   data() {
     return {
       uploadUrl,
-      fileList:[]     
+      // fileList:[]
     };
   },
   methods: {
@@ -45,9 +53,9 @@ export default {
       this.dialogVisible = true;
     },
     /* 清空图片 */
-    clear(){
-      this.$refs.upload.clearFiles()
-    }
+    clear() {
+      this.$refs.upload.clearFiles();
+    },
   },
 };
 </script>
