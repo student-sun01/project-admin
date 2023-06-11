@@ -8,13 +8,15 @@ import 'normalize.css'
 import '@/assets/css/base.css'
 import JsonExcel from "vue-json-excel";
 import Breadcrumb from "./components/Breadcrumb/Breadcrumb.vue";
+import i18n from './lang/index'
 Vue.component("downloadExcel", JsonExcel);
 Vue.config.productionTip = false
 /* 注册全局面包屑组件 */
 Vue.component("Breadcrumb", Breadcrumb);
 Vue.prototype.$api = api
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
   router,
-  store
-}).$mount('#app')
+  store,
+  i18n,
+}).$mount("#app");

@@ -15,13 +15,15 @@
       <!-- 首页 -->
       <el-menu-item index="/">
         <i class="el-icon-s-home"></i>
-        <span slot="title">首页</span>
+        <!-- <span slot="title">首页</span> -->
+        <span slot="title">{{$t('menu.home')}}</span>
+        
       </el-menu-item>
       <!-- 产品 -->
       <el-submenu index="/product">
         <template slot="title">
           <i class="el-icon-trophy-1"></i>
-          <span>产品管理</span>
+          <span>{{$t('menu.product')}}</span>
         </template>
         <el-menu-item-group>
           <el-menu-item index="/product/list">
