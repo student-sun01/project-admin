@@ -24,7 +24,7 @@ const messages = {
 
 // 准备翻译的语言环境信息
 const i18n = new VueI18n({
-  locale: "en", // 初始化中文
+  locale: "zh", // 初始化中文
   messages,
 });
 Vue.use(Element, {

@@ -6,21 +6,20 @@
       background-color="#112f50"
       text-color="#fff"
       active-text-color="#ffd04b"
-      router
       :collapse="isCollapse"
     >
       <el-menu-item>
         <span slot="title" class="xitong">蓝海后台管理系统</span>
       </el-menu-item>
       <!-- 首页 -->
-      <el-menu-item index="/">
-        <i class="el-icon-s-home"></i>
+      <el-menu-item index="home" @click="toPage('home')">
+        <i class="el-icon-menu"></i>
         <!-- <span slot="title">首页</span> -->
-        <span slot="title">{{$t('menu.home')}}</span>
-        
+        <span slot="title">{{ $t("menu.home") }}</span>
       </el-menu-item>
+      <MenuList :dyMenuList="dyMenuList"></MenuList>
       <!-- 产品 -->
-      <el-submenu index="/product">
+      <!-- <el-submenu index="/product">
         <template slot="title">
           <i class="el-icon-trophy-1"></i>
           <span>{{$t('menu.product')}}</span>
@@ -34,9 +33,9 @@
             <i class="el-icon-menu"></i>产品分类</el-menu-item
           >
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu> -->
       <!-- 订单 -->
-      <el-submenu index="/order">
+      <!-- <el-submenu index="/order">
         <template slot="title">
           <i class="el-icon-s-claim"></i>
           <span>订单管理</span>
@@ -53,9 +52,9 @@
             <i class="el-icon-menu"></i>订单审核</el-menu-item
           >
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu> -->
       <!-- 消息管理 -->
-      <el-submenu index="/news">
+      <!-- <el-submenu index="/news">
         <template slot="title">
           <i class="el-icon-chat-line-round"></i>
           <span>消息管理</span>
@@ -72,9 +71,9 @@
             消息收藏</el-menu-item
           >
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu> -->
       <!-- 广告 -->
-      <el-submenu index="/advert">
+      <!-- <el-submenu index="/advert">
         <template slot="title">
           <i class="el-icon-s-opportunity"></i>
           <span>广告管理</span>
@@ -85,9 +84,9 @@
             广告分类</el-menu-item
           >
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu> -->
       <!-- 系统管理 -->
-       <el-submenu index="/systemanage">
+      <!-- <el-submenu index="/systemanage">
         <template slot="title">
           <i class="el-icon-setting"></i>
           <span>系统管理</span>
@@ -104,41 +103,58 @@
             角色管理</el-menu-item
           >
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu> -->
     </el-menu>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import MenuList from "./MenuList.vue";
 export default {
+  components: {
+    MenuList,
+  },
+  computed: {
+    ...mapState("menu", ["dyMenuList"]),
+  },
+
   props: ["isCollapse"],
   data() {
     return {
-      active:''
-    }
+      active: "",
+    };
   },
-  created(){
+  methods: {
+    toPage(name) {
+      this.$router.push({
+        name,
+      });
+    },
+  },
+  created() {
     /* 刷新后产品libiao列表不会高亮 是因为watch不会立即执行 */
-    if(this.$route.meta.activeMenu){
-        this.active = this.$route.meta.activeMenu
-      }else{
-        this.active = this.$route.path
-      }
+    if (this.$route.meta.activeMenu) {
+      this.active = this.$route.meta.activeMenu;
+    } else {
+      this.active = this.$route.name;
+    }
+    console.log("动态菜单目录-----", this.dyMenuList);
   },
-   watch: {
+  watch: {
     // 监听路由的变化--切换页面组件
     $route(to, from) {
       // 对路由变化作出响应...
-      console.log('watch---to',to);
+      console.log("watch---to", to);
       /* 判断当前的路由里面 meta:{activeMenu:'/product/list'} */
-      let {meta,path} = to
-      if(meta.activeMenu){
-        this.active = meta.activeMenu
-      }else{
-        this.active = path
+      let { meta, name } = to;
+      if (meta.activeMenu) {
+        this.active = meta.activeMenu;
+      } else {
+        this.active = name;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -146,7 +162,7 @@ export default {
 .el-menu {
   border-right: 0;
 }
-.el-menu-item .xitong{
+.el-menu-item .xitong {
   font-size: 17px;
 }
 /deep/ .is-active {

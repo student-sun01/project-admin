@@ -3,38 +3,21 @@ import VueRouter from "vue-router";
 import Layout from "@/views/layout/Index.vue";
 import Login from "@/views/login/Index.vue";
 import Home from "@/views/home/Home.vue";
-/* 产品管理 */
-const AddProduct = () => import("@/views/product/list/AddProduct.vue");
-const Product = () => import("@/views/product/Index.vue");
-const List = () => import("@/views/product/list/Index.vue");
-const Category = () => import("@/views/product/category/Index.vue");
-/* 订单管理 */
-const Order = () => import("@/views/order/Index.vue");
-const OrderList = () => import("@/views/order/order-list/Index.vue");
-const Collect = () => import("@/views/order/order-collect/Index.vue");
-const Contract = ()=>import('@/views/order/contract/Contract.vue')
-
-// 广告
-const Advert = () => import("@/views/advert/Index.vue");
-const AdvertList = () => import("@/views/advert/list/Index.vue");
-const News = () => import("@/views/news/Index.vue");
-const NewsList = () => import("@/views/news/news-list/Index.vue");
-const NewsCollect = () => import("@/views/news/news-collect/Index.vue");
-
-//系统管理
-import SystemManage from "@/views/SystemManage";
-import Department from "@/views/SystemManage/department";
-import Role from "@/views/SystemManage/role";
-
+//点击跳转同一个路径
+// 在VueRouter上配置路由跳转，在router中的index.js中加上以下代码，注意加在use之前
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function (location) {
+    return routerPush.call(this, location).catch(err => {})
+};
 
 Vue.use(VueRouter);
-
-const routes = [
+export const baseRoutes = [
   {
     path: "/",
     component: Layout,
     meta: {
       title: "首页",
+      isLogin: true,
     },
     children: [
       {
@@ -45,137 +28,10 @@ const routes = [
           title: "首页",
         },
       },
-      // 产品
-      {
-        path: "/product",
-        name: "product",
-        component: Product,
-        redirect: "/product/list",
-        meta: {
-          title: "产品管理",
-        },
-        children: [
-          {
-            path: "list",
-            name: "list",
-            component: List,
-            meta: {
-              title: "产品列表",
-            },
-          },
-          {
-            path: "category",
-            name: "category",
-            component: Category,
-            meta: {
-              title: "产品分类",
-            },
-          },
-          {
-            path: "add-product",
-            name: "add-product",
-            component: AddProduct,
-            meta: {
-              //配置高亮标识
-              activeMenu: "/product/list",
-              title: "产品详情",
-            },
-          },
-        ],
-      },
-      // 订单
-      {
-        path: "/order",
-        name: "order",
-        component: Order,
-        redirect: "/order/order-list",
-        meta: {
-          title: "订单管理",
-        },
-        children: [
-          {
-            path: "order-list",
-            name: "order-list",
-            component: OrderList,
-            meta: {
-              title: "订单列表",
-            },
-          },
-          {
-            path: "collect",
-            name: "collect",
-            component: Collect,
-            meta: {
-              title: "汇总订单",
-            },
-          },
-          {
-            path: "contract",
-            name: "contract",
-            component: Contract,
-            meta: {
-              title: "订单审核",
-            },
-          },
-        ],
-      },
-      // 消息管理
-      {
-        path: "/news",
-        name: "news",
-        component: News,
-        children: [
-          {
-            path: "news-list",
-            name: "news-list",
-            component: NewsList,
-          },
-          {
-            path: "news-collect",
-            name: "news-collect",
-            component: NewsCollect,
-          },
-        ],
-      },
-      // 广告
-      {
-        path: "/advert",
-        name: "advert",
-        component: Advert,
-        meta: {
-          title: "广告管理",
-        },
-        children: [
-          {
-            path: "advert-list",
-            name: "advert-list",
-            component: AdvertList,
-            meta: {
-              title: "广告管理",
-            },
-          },
-        ],
-      },
-      // 系统管理
-      {
-        path: "/systemanage",
-        name: "systemanage",
-        component: SystemManage,
-        children: [
-          {
-            path: "department",
-            name: "department",
-            component: Department,
-          },
-          {
-            path: "role",
-            name: "role",
-            component: Role,
-          },
-        ],
-      },
     ],
   },
+];
+export const routes = [
   {
     path: "/login",
     name: "login",
@@ -183,9 +39,30 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({
-  mode: "history",
+// const router = new VueRouter({
+//   mode: "history",
+//   base: process.env.BASE_URL,
+//   routes,
+// });
+/* 
+解决：退出登录再登录后 控制台路由命名重复警告问题
+
+  发现自己的name并没有重名,那么一般是后台动态路由导致的报错警告。
+  动态路由一般来说是通过后端接口返回拿到数据，然后在路由守卫router.beforeEach 中进行添加。
+  addRoutes 方法仅仅是帮你注入新的路由，并没有帮你剔除其它路由。
+
+*/
+
+const createRouter  =() => new VueRouter({
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
+const router = createRouter()
+export function resetRouter () {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // the relevant part
+}
+
+
 export default router;

@@ -122,5 +122,14 @@ const api = {
   getDetail(params) {
     return axios.get(base.detail, { params });
   },
+  /* 登录 */
+  login(params) {
+    return axios.post(base.login, params);
+  },
+ 
 };
+ /* 权限 */
+ export function permission(params) {
+    return axios.get(base.permission, { params });
+  }
 export default api;
